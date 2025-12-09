@@ -963,12 +963,10 @@ while running:
 
             if btn_repeat.clicked(event):
                 def replay():
-                    seq = list(played_past_notes)
-                    print("Replaying past notes:", seq)
-                    for freq, dur in seq:
-                        play_note(freq, dur, record=False)
-                threading.Thread(target=replay, daemon=True).start()
-
+                    played_past_notes
+                    print("Replaying past notes:", played_past_notes)
+                    for n in played_past_notes:
+                        threading.Thread(target=play_note, args=(NOTE_FREQS[n[0]], n[1]), daemon=True).start()
 
             if play_here_button and play_here_button.clicked(event):
                 if current_index < len(current_song_seq):

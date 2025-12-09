@@ -821,10 +821,6 @@ def draw_play():
         screen.blit(next_label, (card_next.x + 30, card_next.y + 25))
         screen.blit(next_value, (card_next.x + 30, card_next.y + 50))
 
-        btn_play_here = Button("Ouvir", (card_next.x + 200, card_next.y + 60, 150, 50), color=WARNING, font=FONT_SMALL)
-        btn_play_here.draw(screen)
-        play_here_button = btn_play_here
-
     # Botões de ação
     btn_repeat.draw(screen)
     btn_action_sing.draw(screen)

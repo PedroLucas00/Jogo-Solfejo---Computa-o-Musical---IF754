@@ -807,17 +807,21 @@ def draw_rules():
     draw_text_with_shadow(screen, "REGRAS DO JOGO", FONT_SUBTITLE, ACCENT, (50, 30), shadow_offset=3)
 
     # Card com regras e gradiente
-    card_rect = draw_card(screen, (50, 100, WIDTH-100, 450), BG_CARD, gradient=True)
+    card_rect = draw_card(screen, (50, 100, WIDTH-100, 520), BG_CARD, gradient=True)
 
     rules = [
-        ("1.", "Você começa com 3 vidas", "Não desperdice tentando adivinhar sem certeza!"),
-        ("2.", "Ouça as notas reveladas", "Clique em 'Repetir Notas' para ouvir novamente."),
-        ("3.", "Cante a próxima nota", "SEGURE a nota por 1 segundo para desbloquear."),
-        ("4.", "Adivinhe a música", "Digite o nome quando achar que sabe qual é!")
+        ("1.", "Você começa com 3 vidas", ["Não desperdice tentando adivinhar sem certeza!"]),
+        ("2.", "Ouça as notas reveladas", ["Clique em 'Repetir Notas' para ouvir novamente."]),
+        ("3.", "Cante a próxima nota", [
+            "Use as agulhas como guia: uma fixa na nota alvo e outra",
+            "móvel ligada à frequência captada pelo microfone.",
+            "Isso ajuda a reproduzir a nota corretamente."
+        ]),
+        ("4.", "Adivinhe a música", ["Digite o nome quando achar que sabe qual é!"])
     ]
 
     y = card_rect.y + 30
-    for icon, title, desc in rules:
+    for icon, title, desc_lines in rules:
         # Ícone
         icon_surf = FONT_HEADING.render(icon, True, ACCENT)
         screen.blit(icon_surf, (card_rect.x + 30, y))
@@ -826,11 +830,14 @@ def draw_rules():
         title_surf = FONT.render(title, True, TEXT_PRIMARY)
         screen.blit(title_surf, (card_rect.x + 80, y + 2))
 
-        # Descrição
-        desc_surf = FONT_SMALL.render(desc, True, TEXT_SECONDARY)
-        screen.blit(desc_surf, (card_rect.x + 80, y + 32))
+        # Descrição (pode ter múltiplas linhas)
+        desc_y = y + 32
+        for line in desc_lines:
+            desc_surf = FONT_SMALL.render(line, True, TEXT_SECONDARY)
+            screen.blit(desc_surf, (card_rect.x + 80, desc_y))
+            desc_y += 22
 
-        y += 90
+        y += 110
 
     btn_back.draw(screen)
 
